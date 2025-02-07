@@ -68,6 +68,27 @@ build expr *west_args: _parse_combos
         just _build_single "$board" "$shield" "$snippet" {{ west_args }}
     done
 
+# Build for corne
+corne:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just build corne_
+
+    echo "--->>> Connect Left <<<---"
+    until findmnt /run/media/nasser/NICENANO 2>/dev/null; do
+      sleep 1
+    done
+    cp {{ out }}/corne_left-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
+
+    echo "--->>> Connect Right <<<---"
+    sleep 5
+    until findmnt /run/media/nasser/NICENANO; do
+      sleep 1
+    done
+    cp {{ out }}/corne_right-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
+
+    echo "--->>> Done <<<---"
+
 # clear build cache and artifacts
 clean:
     rm -rf {{ build }} {{ out }}

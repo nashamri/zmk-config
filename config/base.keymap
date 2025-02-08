@@ -223,8 +223,8 @@ ZMK_BASE_LAYER(Sym,
                                               ___            ___             ,   ___              ___)
 ZMK_BASE_LAYER(Nav,
     ___           ___           ___           ___            ___             ,   ___              &kp PG_UP     &kp ESC          &kp TAB        ___           ,
-    ___           ___           ___           ___            ___             ,   &kp LEFT         &kp DOWN      &kp UP           &kp RIGHT      NAV_BSPC      , 
-    ___           ___           ___           ___            ___             ,   &kp PG_DN        &kp HOME      &kp END          &kp PG_UP      NAV_DEL       , 
+    ___           ___           ___           ___            ___             ,   &kp LEFT         &kp DOWN      &kp UP           &kp RIGHT      NAV_BSPC      ,
+    ___           ___           ___           ___            ___             ,   &kp HOME         &kp PG_DN     &kp PG_UP        &kp END        NAV_DEL       ,
                                               ___            ___             ,   ___              CANCEL)
 ZMK_BASE_LAYER(Fn,
     ___           &kp F9        &kp F8        &kp F7        &kp F12          ,   &kp C_PREV       &kp C_MUTE    &kp C_VOL_UP     &kp C_NEXT    ___            ,

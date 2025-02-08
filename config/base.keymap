@@ -15,11 +15,12 @@
 #include "zmk-helpers/unicode-chars/german.dtsi"
 
 #define DEF 0
-#define NAV 1
-#define FN 2
-#define NUM 3
-#define SYS 4
-#define MOUSE 5
+#define SYM 1
+#define NAV 2
+#define FN 3
+#define NUM 4
+#define SYS 5
+#define MOUSE 6
 
 #define XXX &none
 #define ___ &trans
@@ -61,6 +62,8 @@
 
 MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS) // Left-hand HRMs.
 MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
+MAKE_HRM(hmlm, &mo, &kp, KEYS_R THUMBS) // Left-hand HRMs  (momentary layer).
+MAKE_HRM(hmrm, &mo, &kp, KEYS_L THUMBS) // Right-hand HRMs (momentary layer).
 
 // Hack: Make HRM combos tap-only (cf, ZMK issue #544).
 #define ZMK_COMBO_8(NAME, TAP, POS, LAYERS, COMBO_MS, IDLE_MS, HOLD, SIDE)     \
@@ -208,45 +211,39 @@ ZMK_BEHAVIOR(my_ht, hold_tap,
 
 
 ZMK_BASE_LAYER(Base,
-    &kp Q         &kp W         &kp E         &kp R         &kp T            ,   &kp Y            &kp U         &kp I         &kp O          &kp P          ,
-    &kp A         &kp S         &kp D         &kp F         &kp G            ,   &kp H            &kp J         &kp K         &kp L          &kp SEMI       ,
-    &hml LGUI Z   &hml LCTRL X  &kp C         &hml LALT V   &kp B            ,   &kp N            &hmr LALT M   &kp COMMA     &hmr LCTRL DOT &hmr LGUI FSLH ,
-                                              &lt_spc NAV 0 &my_ht LSHFT TAB ,   &my_ht LSHFT ESC &lt FN RET
-)
-
+    &kp Q         &kp W         &kp E         &kp R         &kp T            ,   &kp Y            &kp U         &kp I           &kp O          &kp P          ,
+    &kp A         &kp S         &kp D         &kp F         &kp G            ,   &kp H            &kp J         &kp K           &kp L          &kp SEMI       ,
+    &hml LGUI Z   &hml LCTRL X  &hmlm SYM C   &hml LALT V   &kp B            ,   &kp N            &hmr LALT M   &hmrm SYM COMMA &hmr LCTRL DOT &hmr LGUI FSLH ,
+                                              &lt_spc NAV 0 &my_ht LSHFT TAB ,   &my_ht LSHFT ESC &lt FN RET)
+ZMK_BASE_LAYER(Sym,
+    &kp EXCL      &kp AT        &kp HASH      &kp DLLR       &kp PRCNT       ,   &kp CARET        &kp LBKT      &kp RBKT        &kp AMPS       &kp BSLH       ,
+    &kp GRAVE     &kp TILDE     &kp UNDER     &kp MINUS      &kp PLUS        ,   &kp EQUAL        &kp LPAR      &kp RPAR        &kp STAR       &kp PIPE       ,
+    ___           ___           ___           ___            ___             ,   ___              &kp LBRC      &kp RBRC        ___            ___            , 
+                                              ___            ___             ,   ___              ___)
 ZMK_BASE_LAYER(Nav,
-    ___           ___           &kp LS(TAB)   &swapper      ___         ,   &kp PG_UP     NAV_BSPC      NAV_UP        NAV_DEL       ___         ,
-    &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     ___         ,   &kp PG_DN     NAV_LEFT      NAV_DOWN      NAV_RIGHT     &kp RET     ,
-    ___           ___           ___           ___           ___         ,   &kp INS       &kp TAB       ___           ___           ___         ,
-                                              ___           ___         ,   ___           CANCEL
-)
-
+    ___           ___           ___           ___            ___             ,   ___              &kp PG_UP     &kp ESC          &kp TAB        ___           ,
+    ___           ___           ___           ___            ___             ,   &kp LEFT         &kp DOWN      &kp UP           &kp RIGHT      NAV_BSPC      , 
+    ___           ___           ___           ___            ___             ,   &kp PG_DN        &kp HOME      &kp END          &kp PG_UP      NAV_DEL       , 
+                                              ___            ___             ,   ___              CANCEL)
 ZMK_BASE_LAYER(Fn,
-    &kp F12       &kp F7        &kp F8        &kp F9        ___         ,   ___           &kp C_PREV    &kp C_VOL_UP  &kp C_NEXT    ___         ,
-    &hml LGUI F11 &hml LALT F4  &hml LSHFT F5 &hml LCTRL F6 ___         ,   ___           DSK_PREV      VOL_DOWN      DSK_NEXT      ___         ,
-    &kp F10       &kp F1        &kp F2        &kp F3        ___         ,   PIN_APP       PIN_WIN       DSK_MGR       ___           ___         ,
-                                              ___           ___         ,   &kp C_MUTE    &kp C_PP
-)
-
+    ___           &kp F9        &kp F8        &kp F7        &kp F12          ,   &kp C_PREV       &kp C_MUTE    &kp C_VOL_UP     &kp C_NEXT    ___            ,
+    ___           &kp F6        &kp F5        &kp F4        &kp F11          ,   &kp C_PP         &kp PSCRN     &kp C_VOL_DN     ___           ___            ,
+    ___           &kp F3        &kp F2        &kp F1        &kp F10          ,   ___              ___           ___              ___           ___            ,
+                                              ___           ___              ,   ___              ___)
 ZMK_BASE_LAYER(Num,
-    ___           &kp N7        &kp N8        &kp N9        ___         ,   ___           ___           ___           ___           ___         ,
-    &hml LGUI N0  &hml LALT N4  &hml LSHFT N5 &hml LCTRL N6 ___         ,   ___           ___           ___           ___           ___         ,
-    ___           &kp N1        &kp N2        &kp N3        ___         ,   ___           ___           ___           ___           ___         ,
-                                              ___           ___         ,   ___           ___
-)
-
+    &kp N1        &kp N2        &kp N3        &kp N4        &kp N5           ,   &kp N6           &kp N7        &kp N8           &kp N9        &kp N0         ,
+    ___           ___           ___           ___           ___              ,   ___              &kp N4        &kp N5           &kp N6        ___            ,
+    ___           ___           ___           ___           ___              ,   ___              &kp N1        &kp N2           &kp N3        &kp DOT        ,
+                                              ___           ___              ,   ___              ___           &kp N0)
 ZMK_BASE_LAYER(Sys,
-                               _BT_SEL_KEYS_                            ,   ___           ___           ___           ___           ___         ,
-    ___           ___           ___           ___           &bootloader ,   &bootloader   ___           ___           ___           ___         ,
-    ___           ___           ___           ___           &sys_reset  ,   &sys_reset    ___           ___           ___           ___         ,
-                                              ___           ___         ,   ___           ___
-)
-
+                               _BT_SEL_KEYS_                                 ,   ___              ___           ___              ___           ___            ,
+    ___           ___           ___           ___           &bootloader      ,   &bootloader      ___           ___              ___           ___            ,
+    ___           ___           ___           ___           &sys_reset       ,   &sys_reset       ___           ___              ___           ___            ,
+                                              ___           ___              ,   ___              ___)
 ZMK_BASE_LAYER(Mouse,
-    ___           ___           ___           ___           ___         ,   ___           &kp PG_UP     U_MS_U         &kp PG_DN    ___         ,
-    ___           ___           ___           ___           ___         ,   U_WH_L        U_MS_L        U_MS_D         U_MS_R       U_WH_R      ,
-    ___           ___           ___           ___           ___         ,   ___           &mkp LCLK     &mkp MCLK      &mkp RCLK    ___         ,
-                                              ___           ___         ,   U_WH_U        U_WH_D
-)
+    ___           ___           ___           ___           ___              ,   ___              U_WH_D        U_MS_U           U_WH_U       ___             ,
+    ___           ___           ___           ___           ___              ,   ___              U_MS_L        U_MS_D           U_MS_R       ___             ,
+    ___           ___           ___           ___           ___              ,   ___              ___           ___              ___          ___             ,
+                                              ___           ___              ,   &mkp LCLK        &mkp RCLK)
 
 /* vim: set ft=c tw=146: */

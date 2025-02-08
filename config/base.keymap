@@ -27,7 +27,7 @@
 
 /* Global defaults */
 
-#define QUICK_TAP_MS 175
+#define QUICK_TAP_MS 195
 
 &sk {
   release-after-ms = <900>;
@@ -185,7 +185,8 @@ ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
 ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
 
 // Misc aliases. [TODO: clean up]
-#define CANCEL    &kp K_CANCEL            // Cancel caps-word & auto-layers.
+#define CANCEL    &to DEF                 // Cancel go to default layer
+// #define CANCEL    &kp K_CANCEL            // Cancel caps-word & auto-layers.
 #define DSK_PREV  &hmr LCTRL LG(LC(LEFT)) // Previous desktop.
 #define DSK_NEXT  &hmr LALT LG(LC(RIGHT)) // Next     desktop.
 #define PIN_WIN   &kp LG(LC(LS(Q)))       // Pin window across desktops.

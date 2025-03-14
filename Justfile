@@ -78,14 +78,14 @@ corne:
     until findmnt /run/media/nasser/NICENANO 2>/dev/null; do
       sleep 1
     done
-    cp {{ out }}/corne_left-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
+    cp {{ out }}/corne_left+nice_view_adapter+nice_view-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
 
     echo "--->>> Connect Right <<<---"
     sleep 5
     until findmnt /run/media/nasser/NICENANO; do
       sleep 1
     done
-    cp {{ out }}/corne_right-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
+    cp {{ out }}/corne_right+nice_view_adapter+nice_view-nice_nano_v2.uf2 /run/media/nasser/NICENANO || true
 
     echo "--->>> Done <<<---"
 

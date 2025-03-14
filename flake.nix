@@ -38,6 +38,7 @@
               pkgs.yq # Make sure yq resolves to python-yq.
 
               pkgs.util-linux # for findmnt
+              keymap_drawer
 
               # -- Used by just_recipes and west_commands. Most systems already have them. --
               # pkgs.gawk

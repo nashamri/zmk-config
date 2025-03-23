@@ -89,6 +89,27 @@ corne:
 
     echo "--->>> Done <<<---"
 
+# Build for totem
+totem:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just build totem
+
+    echo "--->>> Connect Left <<<---"
+    until findmnt /run/media/nasser/XIAO-SENSE 2>/dev/null; do
+      sleep 1
+    done
+    cp {{ out }}/totem_left-seeeduino_xiao_ble.uf2 /run/media/nasser/XIAO-SENSE || true
+
+    echo "--->>> Connect Right <<<---"
+    sleep 5
+    until findmnt /run/media/nasser/XIAO-SENSE; do
+      sleep 1
+    done
+    cp {{ out }}/totem_right-seeeduino_xiao_ble.uf2 /run/media/nasser/XIAO-SENSE || true
+
+    echo "--->>> Done <<<---"
+
 # clear build cache and artifacts
 clean:
     rm -rf {{ build }} {{ out }}

@@ -21,6 +21,7 @@
 #define NUM 4
 #define SYS 5
 #define MOUSE 6
+#define GAME 7
 
 #define XXX &none
 #define ___ &trans
@@ -242,9 +243,14 @@ ZMK_BASE_LAYER(Sys,
     ___           ___           ___           ___           &sys_reset       ,   &sys_reset       ___           ___              ___           ___            ,
                                               ___           ___              ,   ___              ___)
 ZMK_BASE_LAYER(Mouse,
-    ___           ___           ___           ___           ___              ,   ___              U_WH_D        U_MS_U           U_WH_U       ___             ,
-    ___           ___           ___           ___           ___              ,   ___              U_MS_L        U_MS_D           U_MS_R       ___             ,
-    ___           ___           ___           ___           ___              ,   ___              ___           ___              ___          ___             ,
+    ___           ___           ___           ___           ___              ,   ___              U_WH_D        U_MS_U           U_WH_U        ___            ,
+    ___           ___           ___           ___           ___              ,   ___              U_MS_L        U_MS_D           U_MS_R        ___            ,
+    ___           ___           ___           ___           ___              ,   ___              ___           ___              ___           ___            ,
                                               ___           ___              ,   &mkp LCLK        &mkp RCLK)
+ZMK_BASE_LAYER(Game,
+    &kp ESC       &kp Q         &kp W         &kp E         &kp R            ,   ___              ___           &kp UP           ___           ___            ,
+    &kp TAB       &kp A         &kp S         &kp D         &kp F            ,   ___              &kp LEFT      &kp DOWN         &kp RIGHT     ___            ,
+    &kp LSHFT     &kp Z         &kp X         &kp C         &kp V            ,   ___              &kp LALT      ___              &kp LCTRL     ___            ,
+                                              ___           &kp LALT         ,   ___              ___)
 
 /* vim: set ft=c tw=146: */

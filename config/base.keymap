@@ -248,9 +248,9 @@ ZMK_BASE_LAYER(Mouse,
     ___           ___           ___           ___           ___              ,   ___              ___           ___              ___           ___            ,
                                               ___           ___              ,   &mkp LCLK        &mkp RCLK)
 ZMK_BASE_LAYER(Game,
-    &kp ESC       &kp Q         &kp W         &kp E         &kp R            ,   ___              ___           &kp UP           ___           ___            ,
-    &kp TAB       &kp A         &kp S         &kp D         &kp F            ,   ___              &kp LEFT      &kp DOWN         &kp RIGHT     ___            ,
-    &kp LSHFT     &kp Z         &kp X         &kp C         &kp V            ,   ___              &kp LALT      ___              &kp LCTRL     ___            ,
-                                              ___           &kp LALT         ,   ___              ___)
+    &kp T         &kp Q         &kp W         &kp E         &kp R            ,   ___              ___           ___              ___           ___            ,
+    &kp G         &kp A         &kp S         &kp D         &kp F            ,   ___              ___           ___              ___           ___            ,
+    &kp B         &hml LCTRL Z  &kp X         &hml LALT C   &kp V            ,   ___              ___           ___              ___           ___            ,
+                                              ___           ___              ,   ___              ___)
 
 /* vim: set ft=c tw=146: */

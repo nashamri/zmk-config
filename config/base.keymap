@@ -214,7 +214,7 @@ ZMK_BEHAVIOR(my_ht, hold_tap,
 
 ZMK_BASE_LAYER(Base,
     &kp Q         &kp W         &kp E         &kp R         &kp T            ,   &kp Y            &kp U         &kp I           &kp O          &kp P          ,
-    &kp A         &kp S         &kp D         &hml LALT F   &hmlm NUM G      ,   &kp H            &kp J         &kp K           &kp L          &kp SEMI       ,
+    &kp A         &kp S         &kp D         &hmlm NUM F   &hml LALT G      ,   &kp H            &kp J         &kp K           &kp L          &kp SEMI       ,
     &hml LGUI Z   &hml LCTRL X  &hmlm SYM C   &hml LALT V   &hmlm NAV B      ,   &kp N            &hmr LALT M   &hmrm SYM COMMA &hmr LCTRL DOT &hmr LGUI FSLH ,
                                               &lt_spc NAV 0 &my_ht LSHFT TAB ,   &my_ht LSHFT ESC &lt FN RET)
 ZMK_BASE_LAYER(Sym,

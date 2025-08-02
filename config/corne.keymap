@@ -5,7 +5,7 @@
         &kp GRAVE    LT RT    &kp BSPC                       \
         &kp ESC      LM RM    &kp SQT                        \
         &kp LCTRL    LB RB    &kp RCTRL                      \
-        &kp LGUI     LH RH    &kp LGUI                       \
+                     LH RH                                   \
     )
 
 #include "zmk-helpers/key-labels/42.h"

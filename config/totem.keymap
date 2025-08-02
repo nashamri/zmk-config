@@ -5,7 +5,7 @@
                      LT RT                                   \
                      LM RM                                   \
         &kp LCTRL    LB RB    &kp SQT                        \
-        &kp LGUI     LH RH    &kp LGUI                       \
+                     LH RH                                   \
     )
 
 #include "zmk-helpers/key-labels/totem.h"

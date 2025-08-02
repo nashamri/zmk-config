@@ -6,13 +6,19 @@
   #include <dt-bindings/zmk/outputs.h>
   #define _BT_SEL_KEYS_                                                        \
       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
+  #define _BT_OUT_ &out OUT_TOG
 #else
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
+  #define _BT_OUT_ &trans
+#endif
+
+#ifdef RGB
+  #define _RGB_TOG_ &rgb_ug RGB_TOG
+#else
+  #define _RGB_TOG_ &trans
 #endif
 
 #include "zmk-helpers/helper.h"
-#include "zmk-helpers/unicode-chars/greek.dtsi"
-#include "zmk-helpers/unicode-chars/german.dtsi"
 
 #define DEF 0
 #define SYM 1
@@ -71,10 +77,9 @@ MAKE_HRM(hmrm, &mo, &kp, KEYS_L THUMBS) // Right-hand HRMs (momentary layer).
   MAKE_HRM(hm_combo_##NAME, &kp, TAP, SIDE THUMBS)                             \
   ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
 
-/* Combos, leader key sequences, mouse emulation */
+/* Combos, mouse emulation */
 
 #include "combos.dtsi" // Must be sourced after HRM-combo hack.
-#include "leader.dtsi"
 #include "mouse.dtsi"
 
 /* Nav cluster */
@@ -182,9 +187,6 @@ ZMK_MOD_MORPH(bs_del, bindings = <&kp BSPC>, <&kp DEL>;
 ZMK_TAP_DANCE(copy_cut, bindings = <&kp LC(INS)>, <&kp LC(X)>;
               tapping-term-ms = <200>;)
 
-// Sticky shift + leader.
-ZMK_MACRO(leader_sft, bindings = <&sk LSHFT &leader>;)
-
 // Misc aliases. [TODO: clean up]
 #define CANCEL    &to DEF                 // Cancel go to default layer
 // #define CANCEL    &kp K_CANCEL            // Cancel caps-word & auto-layers.
@@ -219,24 +221,27 @@ ZMK_BASE_LAYER(Base,
                                               &lt_spc NAV 0 &my_ht LSHFT TAB ,   &my_ht LSHFT ESC &lt FN RET)
 ZMK_BASE_LAYER(Sym,
     &kp EXCL      &kp AT        &kp HASH      &kp CARET      &kp DLLR        ,   &kp PRCNT        &kp LBKT      &kp RBKT        &kp AMPS       &kp BSLH       ,
-    &kp GRAVE     &kp TILDE     &kp UNDER     &kp MINUS      &kp PLUS        ,   &kp EQUAL        &kp LPAR      &kp RPAR        &kp STAR       &kp PIPE       ,
-    ___           ___           ___           ___            ___             ,   ___              &kp LBRC      &kp RBRC        ___            ___            , 
+    &kp GRAVE     &kp TILDE     &kp UNDER     &kp MINUS      &kp EQUAL       ,   &kp EQUAL        &kp LPAR      &kp RPAR        &kp STAR       &kp PIPE       ,
+    ___           ___           ___           &kp PLUS       ___             ,   ___              &kp LBRC      &kp RBRC        ___            ___            , 
                                               ___            ___             ,   ___              ___)
 ZMK_BASE_LAYER(Nav,
     ___           ___           ___           ___            ___             ,   ___              &kp PG_UP     &kp ESC          &kp TAB        ___           ,
     ___           ___           ___           ___            ___             ,   &kp LEFT         &kp DOWN      &kp UP           &kp RIGHT      NAV_BSPC      ,
     ___           ___           ___           ___            ___             ,   &kp HOME         &kp PG_DN     &kp PG_UP        &kp END        NAV_DEL       ,
                                               ___            &kp LGUI        ,   ___              CANCEL)
+
 ZMK_BASE_LAYER(Fn,
     ___           &kp F9        &kp F8        &kp F7         &kp F12         ,   &kp C_PREV       &kp C_MUTE    &kp C_VOL_UP     &kp C_NEXT    ___            ,
     ___           &kp F6        &kp F5        &kp F4         &kp F11         ,   &kp C_PP         &kp PSCRN     &kp C_VOL_DN     ___           ___            ,
     ___           &kp F3        &kp F2        &kp F1         &kp F10         ,   ___              ___           ___              ___           ___            ,
                                               ___            ___             ,   ___              ___)
+
 ZMK_BASE_LAYER(Game,
     &kp T         &kp Q         &kp W         &kp E          &kp R           ,   ___              ___           ___              ___           ___            ,
     &kp G         &kp A         &kp S         &kp D          &kp F           ,   ___              ___           ___              ___           ___            ,
     &kp B         &hml LCTRL Z  &kp X         &hml LALT C    &kp V           ,   ___              ___           ___              ___           ___            ,
                                               ___            ___             ,   ___              ___)
+
 ZMK_BASE_LAYER(Num,
     &kp N1        &kp N2        &kp N3        &kp N4         &kp N5          ,   &kp N6           &kp N7        &kp N8           &kp N9        &kp N0         ,
     ___           ___           ___           ___            ___             ,   ___              &kp N4        &kp N5           &kp N6        ___            ,
@@ -244,8 +249,8 @@ ZMK_BASE_LAYER(Num,
                                               ___            &kp LGUI        ,   ___              ___           &kp N0)
 ZMK_BASE_LAYER(Sys,
                                _BT_SEL_KEYS_                                 ,   ___              ___           ___              ___           ___            ,
-    ___           ___           ___           ___            &bootloader     ,   &bootloader      ___           ___              ___           ___            ,
-    ___           ___           ___           ___            &sys_reset      ,   &sys_reset       ___           ___              ___           ___            ,
+    ___           ___           ___           _BT_OUT_       &bootloader     ,   &bootloader      ___           ___              ___           ___            ,
+    ___           ___           ___           _RGB_TOG_      &sys_reset      ,   &sys_reset       ___           ___              ___           ___            ,
                                               ___            ___             ,   ___              ___)
 ZMK_BASE_LAYER(Mouse,
     ___           ___           ___           ___            ___             ,   ___              ___           U_MS_U           ___           ___            ,

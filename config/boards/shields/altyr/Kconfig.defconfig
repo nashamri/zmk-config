@@ -1,0 +1,6 @@
+if SHIELD_ALTYR
+
+config ZMK_KEYBOARD_NAME
+  default "altyr"
+
+endif

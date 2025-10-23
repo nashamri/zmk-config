@@ -26,4 +26,4 @@ include:
   - board: "nice_nano_v2" 
     shield: iqx3
   - board: "nice_nano_v2"
-    shield: altyr
+    shield: "altyr nice_view"

@@ -43,6 +43,11 @@
         wakeup-sources = <&wakeup_scan>;
     };
 
+    // Alias so nice_view.overlay can find it
+    aliases {
+        nice-view-spi = &spi0;
+    };
+
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         label = "KSCAN";
@@ -70,3 +75,44 @@
             ;
     };
 };
+
+// SPI configuration
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 4)>,     // SCK on P1.04 (D8)
+                    <NRF_PSEL(SPIM_MOSI, 1, 6)>,    // MOSI on P1.06 (D9)
+                    <NRF_PSEL(SPIM_MISO, 0, 26)>;   // MISO on P0.26 (unused but required)
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 4)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 6)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 26)>;
+            low-power-enable;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;  // CS on P0.11 (D7)
+
+    ls0xx: ls0xx@0 {
+        compatible = "sharp,ls0xx";
+        label = "DISPLAY";
+        spi-max-frequency = <2000000>;
+        reg = <0>;
+        width = <160>;
+        height = <68>;
+    };
+};
+
+// Create the nice_view_spi label that nice_view.overlay expects
+nice_view_spi: &spi0 {};

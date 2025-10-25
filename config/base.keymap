@@ -240,9 +240,9 @@ ZMK_BASE_LAYER(Sym,
     ___           ___           ___                  &kp PLUS                ___             ,   ___              &kp LBRC      &kp RBRC        ___            ___            , 
                                 ___                  ___                     ___             ,   ___              ___           ___)
 ZMK_BASE_LAYER(Nav,
-    &kp LC(W)     ___           &kp LC(LS(TAB))      &kp LC(TAB)             ___             ,   ___              &kp PG_UP     &kp ESC          &kp TAB        ___           ,
+    ___           &kp LC(W)     &kp LC(LS(TAB))      &kp LC(TAB)             ___             ,   ___              &kp PG_UP     &kp ESC          &kp TAB        ___           ,
     ___           ___           &kp F5               &cs_toggle              &kp LCTRL       ,   &kp LEFT         &kp DOWN      &kp UP           &kp RIGHT      NAV_BSPC      ,
-    ___           ___           U_WH_U               U_WH_D                  ___             ,   &kp HOME         &kp PG_DN     &kp PG_UP        &kp END        NAV_DEL       ,
+    ___           ___           &kp LA(LEFT)         &kp LA(RIGHT)           ___             ,   &kp HOME         &kp PG_DN     &kp PG_UP        &kp END        NAV_DEL       ,
                                 ___                  ___                     &kp LGUI        ,   ___              CANCEL        ___)
 
 ZMK_BASE_LAYER(Fn,

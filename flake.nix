@@ -12,19 +12,26 @@
     zephyr-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, zephyr-nix, ... }:
+  outputs =
+    { nixpkgs, zephyr-nix, ... }:
     let
-      systems =
-        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
-      devShells = forAllSystems (system:
+    in
+    {
+      devShells = forAllSystems (
+        system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
           zephyr = zephyr-nix.packages.${system};
-          keymap_drawer =
-            pkgs.python3Packages.callPackage ./nix/keymap-drawer.nix { };
-        in {
+          keymap_drawer = pkgs.python3Packages.callPackage ./nix/keymap-drawer.nix { };
+        in
+        {
           default = pkgs.mkShellNoCC {
             packages = [
               zephyr.pythonEnv
@@ -32,6 +39,7 @@
 
               pkgs.cmake
               pkgs.dtc
+              pkgs.gcc
               pkgs.ninja
 
               pkgs.just
@@ -51,14 +59,18 @@
             ]
             # Temporary disable keymap_drawer on aarch64-linux due to
             # https://github.com/NixOS/nixpkgs/issues/372375.
-              ++ nixpkgs.lib.optionals (system != "aarch64-linux")
-              [ keymap_drawer ];
+            ++ nixpkgs.lib.optionals (system != "aarch64-linux") [ keymap_drawer ];
+
+            env = {
+              PYTHONPATH = "${zephyr.pythonEnv}/${zephyr.pythonEnv.sitePackages}";
+            };
 
             shellHook = ''
               export ZMK_BUILD_DIR=$(pwd)/.build;
               export ZMK_SRC_DIR=$(pwd)/zmk/app;
             '';
           };
-        });
+        }
+      );
     };
 }

@@ -3,8 +3,8 @@
     ZMK_LAYER(                                               \
         name,                                                \
         &kp GRAVE    LT RT    &kp BSPC                       \
-        &kp ESC      LM RM    &kp SQT                        \
-        &kp LCTRL    LB RB    &kp RCTRL                      \
+        &kp LCTRL    LM RM    &kp SQT                        \
+        &smart_mouse LB RB    &kp RCTRL                      \
                      LH RH                                   \
     )
 

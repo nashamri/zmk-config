@@ -1,0 +1,9 @@
+file_format: "1"
+id: arrowkeeb
+name: ArrowKeeb
+type: shield
+url: https://github.com/nashamri/zmk-config
+requires_kernel: "3.5"
+features:
+  - keys
+  - display

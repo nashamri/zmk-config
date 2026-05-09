@@ -44,6 +44,7 @@
 
               pkgs.just
               pkgs.yq # Make sure yq resolves to python-yq.
+              pkgs.resvg
 
               pkgs.util-linux # for findmnt
               keymap_drawer

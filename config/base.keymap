@@ -263,7 +263,7 @@ ZMK_BASE_LAYER(Num,
     ___           ___           ___                  ___                     ___             ,   ___              &kp N1        &kp N2           &kp N3        &kp DOT        ,
                                 ___                  ___                     &kp LGUI        ,   ___              ___           &kp N0)
 ZMK_BASE_LAYER(Sys,
-                               _BT_SEL_KEYS_                                                 ,   ___              ___           ___              ___           ___            ,
+                               _BT_SEL_KEYS_                                                 ,   ___              ___           ___              ___           &soft_off      ,
     ___           ___           &bt BT_CLR           _BT_OUT_                &bootloader     ,   &bootloader      ___           ___              ___           ___            ,
     ___           ___           ___                  _RGB_TOG_               &sys_reset      ,   &sys_reset       ___           ___              ___           ___            ,
                                 ___                  ___                     ___             ,   ___              ___           ___)

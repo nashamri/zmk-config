@@ -3,4 +3,51 @@ if SHIELD_TUX
 config ZMK_KEYBOARD_NAME
     default "Tux"
 
-endif
+if ZMK_DISPLAY
+
+config I2C
+    default y
+
+config SSD1306
+    default y
+
+# Custom status screens don't get ZMK's bump-up of LV_Z_MEM_POOL_SIZE
+# (only ZMK_DISPLAY_STATUS_SCREEN_BUILT_IN does), so the LVGL heap stays
+# at the Zephyr default of 2048 bytes — too small for three+ widgets.
+# Symptom of running out: later allocations silently return NULL, the
+# screen stops rendering, and the OLED retains its previous content.
+config LV_Z_MEM_POOL_SIZE
+    default 8192
+
+endif # ZMK_DISPLAY
+
+if LVGL
+
+config LV_Z_VDB_SIZE
+    default 100
+
+config LV_Z_FULL_REFRESH
+    default y
+
+config LV_DPI_DEF
+    default 148
+
+config LV_Z_BITS_PER_PIXEL
+    default 1
+
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_1
+endchoice
+
+# Switch the default LVGL font from unscii_8 to Montserrat 12.
+# unscii_8 has no LVGL symbol glyphs (battery, wifi, USB icons), which
+# causes any label that does not explicitly set a font to render those
+# characters as blank squares.  Montserrat 12 was compiled with the full
+# LVGL symbol range included.
+choice LV_FONT_DEFAULT
+    default LV_FONT_DEFAULT_MONTSERRAT_12
+endchoice
+
+endif # LVGL
+
+endif # SHIELD_TUX

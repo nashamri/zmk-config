@@ -5,3 +5,4 @@ type: shield
 url: https://github.com/nashamri/zmk-config
 features:
   - keys
+  - display

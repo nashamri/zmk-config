@@ -1,0 +1,26 @@
+/*
+ * Tux keymap — 44 keys (12×4, bottom row 8 keys centered on cols 2–9).
+ *
+ * Outer column assignments (hardcoded across all layers):
+ *   Left col:   ` / Tab / LShift
+ *   Right col:  Bspc / Enter / RShift
+ *   Bottom row outer: LCtrl / RAlt
+ *
+ * Inner 5+5 columns per row use the shared base.keymap definitions.
+ * Outer positions (LT5/RT5 etc.) are not wired into HRM trigger lists,
+ * which is correct since those keys are utility keys, not alphas.
+ */
+
+#define CONFIG_WIRELESS
+
+#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH) \
+    ZMK_LAYER(                                                 \
+        name,                                                  \
+        &kp GRAVE  LT RT  &kp BSPC   \
+        &kp TAB    LM RM  &kp RET    \
+        &kp LSHFT  LB RB  &kp RSHFT  \
+        &kp LCTRL  LH RH  &kp RALT   \
+    )
+
+#include "tux_key_labels.h"
+#include "base.keymap"

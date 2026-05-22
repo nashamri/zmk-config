@@ -18,6 +18,8 @@ _build_single $board $shield $snippet $artifact *west_args:
     #!/usr/bin/env bash
     set -euo pipefail
     artifact="${artifact:-${shield:+${shield// /+}-}${board}}"
+    # Sanitize: replace / with + so HWMv2 board IDs (e.g. nice_nano//zmk) don't create subdirectories
+    artifact="${artifact//\//+}"
     build_dir="{{ build / '$artifact' }}"
 
     echo "Building firmware for $artifact..."

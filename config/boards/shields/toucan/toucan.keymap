@@ -4,10 +4,9 @@
         name,                                                \
         &kp GRAVE    LT RT    &kp BSPC                       \
         &kp LCTRL    LM RM    &kp SQT                        \
-        &smart_mouse LB RB    &kp RCTRL                      \
+        &kp LSHIFT   LB RB    &kp RCTRL                      \
                      LH RH                                   \
     )
 
 #include "zmk-helpers/key-labels/42.h"
 #include "../../../base.keymap"
-

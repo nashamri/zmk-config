@@ -26,8 +26,8 @@ manifest:
       url-base: https://github.com/urob
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: petejohanson
-      url-base: https://github.com/petejohanson/
+    - name: beekeeb
+      url-base: https://github.com/beekeeb
     - name: caksoylar
       url-base: https://github.com/caksoylar
 
@@ -51,13 +51,17 @@ manifest:
       path: modules/zmk/unicode
 
       # toucan modules
-    - name: cirque-input-module
-      remote: petejohanson
+    - name: zmk_driver_azoteq
+      remote: beekeeb
       revision: main
-      path: modules/zmk/cirque-input-module
+      path: modules/zmk/zmk_driver_azoteq
+    - name: zmk-input-zoom
+      remote: beekeeb
+      revision: main
+      path: modules/zmk/zmk-input-zoom
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: main
+      revision: v0.3
       path: modules/zmk/zmk-rgbled-widget
 
     # Only source necessary Zephyr modules. Remove this entire section to restore
